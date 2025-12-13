@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_attachment_line_form" model="ir.ui.view">
+        <field name="name">res.partner.attachment.line.form</field>
+        <field name="model">res.partner.attachment.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="end_date"/>
+                    </group>
+                    <group>
+                        <field name="attachment_data" filename="attachment_name"/>
+                        <field name="attachment_name" invisible="1"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_partner_attachment_line_tree" model="ir.ui.view">
+        <field name="name">res.partner.attachment.line.tree</field>
+        <field name="model">res.partner.attachment.line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="attachment_data" filename="attachment_name" widget="binary"/>
+                <field name="attachment_name" column_invisible="1"/>
+                <field name="end_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_partner_form_inherit_attachments" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.attachments</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="attachments_tab" string="Attachments">
+                    <field name="attachment_line_ids">
+                        <list editable="bottom">
+                            <field name="name" string="Name"/>
+                            <field name="attachment_data" string="Attachment" filename="attachment_name" widget="binary"/>
+                            <field name="attachment_name" column_invisible="1"/>
+                            <field name="end_date" string="End Date"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
