@@ -1,0 +1,18 @@
+/* Partner Expiration Alert Styling */
+
+/* Red text for salesperson when alert is active */
+.o_form_view .o_partner_alert_active .o_field_widget[name="user_id"] {
+    color: #dc3545 !important;
+    font-weight: bold !important;
+}
+
+.o_form_view .o_partner_alert_active .o_field_widget[name="user_id"] .o_field_many2one_avatar {
+    color: #dc3545 !important;
+}
+
+/* Alternative: Add red border and background */
+.o_form_view .o_partner_alert_active .o_field_widget[name="user_id"] {
+    background-color: #fff5f5;
+    border-left: 3px solid #dc3545;
+    padding-left: 5px;
+}

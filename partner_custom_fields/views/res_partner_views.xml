@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Partner Form View to Add Custom Fields -->
+        <record id="view_partner_form_custom_fields" model="ir.ui.view">
+            <field name="name">res.partner.form.custom.fields</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- Add class to form based on alert status -->
+                <xpath expr="//form" position="attributes">
+                    <attribute name="class" add="o_partner_alert_active" separator=" "/>
+                </xpath>
+
+                <!-- Add custom fields after Company ID in Sales & Purchase tab -->
+                <xpath expr="//field[@name='company_registry']" position="after">
+                    <field name="expire_date" invisible="not is_company"/>
+                    <field name="period" invisible="not is_company"/>
+                    <field name="alert_date" invisible="not is_company" readonly="1"/>
+                    <field name="is_alert_active" invisible="1"/>
+                </xpath>
+
+                <!-- Replace Salesperson field to add alert styling -->
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <field name="user_id"
+                           widget="many2one_avatar_user"
+                           class="text-danger fw-bold"
+                           invisible="not is_alert_active"/>
+                    <field name="user_id"
+                           widget="many2one_avatar_user"
+                           invisible="is_alert_active"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
