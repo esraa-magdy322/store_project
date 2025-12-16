@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_tree_with_dashboard" model="ir.ui.view">
+        <field name="name">res.partner.tree.dashboard</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="js_class">partner_dashboard_list</attribute>
+                <attribute name="decoration-danger">activity_state == 'overdue' or invoice_overdue</attribute>
+            </xpath>
+            <xpath expr="//field[@name='complete_name']" position="after">
+                <field name="company_registry" optional="show"/>
+            </xpath>
+<!--            <xpath expr="//field[@name='complete_name']" position="before">-->
+<!--                <field name="activity_bell_html" widget="html" string=""/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>

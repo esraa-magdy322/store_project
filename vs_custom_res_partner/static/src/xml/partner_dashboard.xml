@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="vs_custom_res_partner.PartnerDashboard" owl="1">
+        <div class="o_vs_partner_dashboard">
+            <div class="vs-card vs-blue" t-on-click="() => this.onCardClick([], {active_test: false})">
+                <div class="vs-title">كل العملاء</div>
+                <div class="vs-value" t-esc="dashboard.total_customers or 0"/>
+            </div>
+            <div class="vs-card vs-green" t-on-click="() => this.onCardClick([[&quot;active&quot;, &quot;=&quot;, true]])">
+                <div class="vs-title">العملاء النشطين</div>
+                <div class="vs-value" t-esc="dashboard.active_customers or 0"/>
+            </div>
+            <div class="vs-card vs-orange" t-on-click="() => this.onCardClick([[&quot;message_needaction&quot;, &quot;=&quot;, true]])">
+                <div class="vs-title">تحذيرات</div>
+                <div class="vs-value" t-esc="dashboard.warning_customers or 0"/>
+            </div>
+            <div class="vs-card vs-purple" t-on-click="() => this.onCardClick([])">
+                <div class="vs-title">اجمالي المساحات</div>
+                <div class="vs-value" t-esc="dashboard.total_areas or 0"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="vs_custom_res_partner.PartnerListView" t-inherit="web.ListRenderer" t-inherit-mode="primary" owl="1">
+        <xpath expr="//div[hasclass('o_list_renderer')]" position="before">
+            <t t-if="props.list and props.list.resModel == 'res.partner' and typeof onCardClick === 'function' and dashboardMetrics">
+                <t t-set="dashboard" t-value="dashboardMetrics.data or {}"/>
+                <t t-call="vs_custom_res_partner.PartnerDashboard"/>
+            </t>
+        </xpath>
+    </t>
+</templates>

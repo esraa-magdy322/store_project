@@ -1,0 +1,51 @@
+.o_vs_partner_dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+
+    .vs-card {
+        border-radius: 10px;
+        padding: 12px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        min-height: 90px;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .vs-title {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .vs-value {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+        }
+    }
+
+    .vs-blue { background: linear-gradient(135deg, #3f8cf5, #2667d1); }
+    .vs-green { background: linear-gradient(135deg, #32c671, #1f9b55); }
+    .vs-orange { background: linear-gradient(135deg, #ffb347, #ff8800); }
+    .vs-purple { background: linear-gradient(135deg, #b36bff, #7f3ac6); }
+}
+
+.o_list_view .o_list_table tbody td .fa-bell.text-danger {
+    color: #dc3545;
+}
+
+.o_list_view .o_list_table tbody td .fa-bell.text-muted {
+    color: #adb5bd;
+}
