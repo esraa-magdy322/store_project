@@ -32,10 +32,5 @@ Long description of module's purpose
     'demo': [
         'demo/demo.xml',
     ],
-    'assets': {
-        'web.assets_frontend': [
-            'customer_enchanemt/static/src/xml/test.xml',
-        ],
-    },
 }
 
