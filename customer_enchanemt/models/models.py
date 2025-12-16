@@ -1,7 +1,7 @@
 # models/res_partner_attachment.py
 from odoo import models, fields, api
 
-
+import base64
 class ResPartnerAttachment(models.Model):
     _name = 'res.partner.attachment.line'
     _description = 'Partner Attachment Line'
@@ -24,6 +24,21 @@ class ResPartnerAttachment(models.Model):
             else:
                 record.file_size = 0
 
+
+    def write(self, vals):
+        """Override write to ensure attachment_data is properly handled"""
+        # If attachment_data is being updated, ensure it's valid base64
+        if 'attachment_data' in vals and vals['attachment_data']:
+            try:
+                if isinstance(vals['attachment_data'], bytes):
+                    base64.b64decode(vals['attachment_data'])
+                elif isinstance(vals['attachment_data'], str):
+                    base64.b64decode(vals['attachment_data'])
+            except Exception as e:
+                raise ValueError(f"Invalid base64 data: {str(e)}")
+
+        result = super(ResPartnerAttachment, self).write(vals)
+        return result
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'

@@ -1,0 +1,50 @@
+<template id="portal_my_details_fields" inherit_id="portal.portal_my_details_fields">
+    <xpath expr="//div[@class='clearfix'][1]" position="before">
+        <!-- Attachments Section -->
+        <div class="col-12">
+            <h5 class="mb-3">Attachments</h5>
+        </div>
+
+        <div class="mb-3 col-xl-6">
+            <label class="col-form-label" for="attachment_name">Attachment Name</label>
+            <input type="text" name="attachment_name" class="form-control" placeholder="Enter attachment name"/>
+        </div>
+
+        <div class="mb-3 col-xl-6">
+            <label class="col-form-label" for="attachment_file">Upload File</label>
+            <input type="file" name="attachment_file" class="form-control"/>
+        </div>
+
+        <div class="mb-3 col-xl-6">
+            <label class="col-form-label" for="end_date">End Date</label>
+            <input type="date" name="end_date" class="form-control"/>
+        </div>
+
+        <div class="clearfix"/>
+
+        <!-- Display existing attachments -->
+        <div class="col-12" t-if="partner.attachment_line_ids">
+            <h6>Existing Attachments:</h6>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>File</th>
+                        <th>End Date</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="partner.attachment_line_ids" t-as="att">
+                        <tr>
+                            <td><t t-esc="att.name"/></td>
+                            <td><t t-esc="att.attachment_name"/></td>
+                            <td><t t-esc="att.end_date"/></td>
+                            <td><t t-esc="att.file_size"/> bytes</td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </xpath>
+</template>
